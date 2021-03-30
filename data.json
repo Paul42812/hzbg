@@ -20,14 +20,14 @@
         },
   
         {
-        "geometry": [15.69476, 48.28729],
-        "type": "click",
-        "text": "38888888888",
-        "images": [
-            "assets/Auring/20191122_090245.jpg",
-            "assets/Auring/20190825_113825.jpg",
-            "assets/Auring/DSC_1453.JPG"
-        ]
+            "lonlat": [15.69476, 48.28729],
+            "type": "click",
+            "text": "38888888888",
+            "images": [
+                "assets/Auring/20191122_090245.jpg",
+                "assets/Auring/20190825_113825.jpg",
+                "assets/Auring/DSC_1453.JPG"
+            ]
         }   
     ]
 }
