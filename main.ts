@@ -3,16 +3,12 @@ import * as ol from 'ol';
 import OSM from 'ol/source/OSM';
 import sVector from 'ol/source/Vector';
 import lVector from 'ol/layer/Vector';
-import {FullScreen, defaults as defaultControls} from 'ol/control';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import {Icon, Style} from 'ol/style';
-import features from './features'
 import {defaults as defaultInteractions} from 'ol/interaction';
 import KeyboardZoom from 'ol/interaction/KeyboardZoom';
-import Collection from 'ol/Collection';
 
-/* Import features from ./features.ts */
 var iconStyle = new Style({
   image: new Icon(({
     anchor: [0.5, 18], 
@@ -22,26 +18,48 @@ var iconStyle = new Style({
   }))
 });
 
-features.icons.forEach(element => {
+$.getJSON( "https://paul42812.github.io/hzbg/data.json", function( data ) {
+
+  var icons = []
+
+  for(var i = 0; i < data.icons.length; i++) {
+    var obj = data.icons[i];
+
+    console.log(obj)
+    
+    icons.push(
+      new ol.Feature({
+        geometry: new Point(fromLonLat([obj.lonlat[0], obj.lonlat[1]])),
+        type: obj.type,
+        text: obj.text,
+        images: [obj.images]
+      })
+    );
+  }
+
+  console.log(icons)
+
+  icons.forEach(element => {
     element.setStyle(iconStyle)
-});
+  });
 
-var vectorSource = new sVector({
-  features: features.icons
-});
+  var vectorSource = new sVector({
+    features: icons
+  });
 
-var vectorLayer = new lVector({
-  source: vectorSource
+  var vectorLayer = new lVector({
+    source: vectorSource
+  });
+
+  map.addLayer(vectorLayer);
 });
 
 /* Initialize map */
 var map = new ol.Map({
-  /*controls: defaultControls().extend([new FullScreen()]),*/
   layers: [
     new TileLayer({
       source: new OSM(),
-    }),
-    vectorLayer
+    })
   ],
   target: 'map',
   view: new ol.View({
@@ -55,16 +73,16 @@ var map = new ol.Map({
 
 /* Change image in browser */
 function left(){
-  if (typeof imgs[index - 1] !== "undefined"){
+  if (typeof imgs[0][index - 1] !== "undefined"){
     index -= 1;
-    (document.getElementById('img') as HTMLImageElement).src = imgs[index];
+    (document.getElementById('img') as HTMLImageElement).src = "https://paul42812.github.io/hzbg/assets/720p/"+imgs[0][index];
   } 
 }
 
 function right(){
-  if (typeof imgs[index + 1] !== "undefined"){
+  if (typeof imgs[0][index + 1] !== "undefined"){
     index += 1;
-    (document.getElementById('img') as HTMLImageElement).src = imgs[index];
+    (document.getElementById('img') as HTMLImageElement).src = "https://paul42812.github.io/hzbg/assets/720p/"+imgs[0][index];
   }
 }
 
@@ -112,7 +130,7 @@ map.on('click', function(evt) {
         imgs = f.get('images'); index = 0;
         hedrtext = f.get('text');
         document.getElementById('txt').innerHTML = hedrtext;
-        (document.getElementById('img') as HTMLImageElement).src = imgs[0];
+        (document.getElementById('img') as HTMLImageElement).src = "https://paul42812.github.io/hzbg/assets/720p/"+ (imgs[0][0]);
 
         ctn = 0;
         while (typeof imgs[ctn] !== "undefined"){
@@ -192,7 +210,7 @@ function CenterImage(){
   img.style.marginTop = String(-(img.height/2)+$(window).height()*(4/100)-5)+"px";
 
   try {
-    if (typeof imgs[index + 1] == "undefined"){
+    if (typeof imgs[0][index + 1] == "undefined"){
       document.getElementById('right_btn').style.visibility = "hidden";
     } else {
       document.getElementById('right_btn').style.visibility = "visible";
@@ -200,7 +218,7 @@ function CenterImage(){
   } catch { }
 
   try {
-    if (typeof imgs[index - 1] == "undefined"){
+    if (typeof imgs[0][index - 1] == "undefined"){
       document.getElementById('left_btn').style.visibility = "hidden";
     } else {
       document.getElementById('left_btn').style.visibility = "visible";

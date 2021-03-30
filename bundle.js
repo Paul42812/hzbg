@@ -2,91 +2,25 @@
     'use strict';
 
     /**
-     * @module ol/util
+     * @module ol/geom/GeometryType
      */
     /**
-     * @return {?} Any return.
+     * The geometry type. One of `'Point'`, `'LineString'`, `'LinearRing'`,
+     * `'Polygon'`, `'MultiPoint'`, `'MultiLineString'`, `'MultiPolygon'`,
+     * `'GeometryCollection'`, `'Circle'`.
+     * @enum {string}
      */
-    function abstract() {
-        return /** @type {?} */ ((function () {
-            throw new Error('Unimplemented abstract method.');
-        })());
-    }
-    /**
-     * Counter for getUid.
-     * @type {number}
-     * @private
-     */
-    var uidCounter_ = 0;
-    /**
-     * Gets a unique ID for an object. This mutates the object so that further calls
-     * with the same object as a parameter returns the same value. Unique IDs are generated
-     * as a strictly increasing sequence. Adapted from goog.getUid.
-     *
-     * @param {Object} obj The object to get the unique ID for.
-     * @return {string} The unique ID for the object.
-     * @api
-     */
-    function getUid(obj) {
-        return obj.ol_uid || (obj.ol_uid = String(++uidCounter_));
-    }
-    /**
-     * OpenLayers version.
-     * @type {string}
-     */
-    var VERSION = '6.5.0';
-
-    var __extends$19 = (undefined && undefined.__extends) || (function () {
-        var extendStatics = function (d, b) {
-            extendStatics = Object.setPrototypeOf ||
-                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-            return extendStatics(d, b);
-        };
-        return function (d, b) {
-            extendStatics(d, b);
-            function __() { this.constructor = d; }
-            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-        };
-    })();
-    /**
-     * Error object thrown when an assertion failed. This is an ECMA-262 Error,
-     * extended with a `code` property.
-     * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error.
-     */
-    var AssertionError = /** @class */ (function (_super) {
-        __extends$19(AssertionError, _super);
-        /**
-         * @param {number} code Error code.
-         */
-        function AssertionError(code) {
-            var _this = this;
-            var path = 'v' + VERSION.split('-')[0];
-            var message = 'Assertion failed. See https://openlayers.org/en/' +
-                path +
-                '/doc/errors/#' +
-                code +
-                ' for details.';
-            _this = _super.call(this, message) || this;
-            /**
-             * Error code. The meaning of the code can be found on
-             * https://openlayers.org/en/latest/doc/errors/ (replace `latest` with
-             * the version found in the OpenLayers script's header comment if a version
-             * other than the latest is used).
-             * @type {number}
-             * @api
-             */
-            _this.code = code;
-            /**
-             * @type {string}
-             */
-            _this.name = 'AssertionError';
-            // Re-assign message, see https://github.com/Rich-Harris/buble/issues/40
-            _this.message = message;
-            return _this;
-        }
-        return AssertionError;
-    }(Error));
+    var GeometryType = {
+        POINT: 'Point',
+        LINE_STRING: 'LineString',
+        LINEAR_RING: 'LinearRing',
+        POLYGON: 'Polygon',
+        MULTI_POINT: 'MultiPoint',
+        MULTI_LINE_STRING: 'MultiLineString',
+        MULTI_POLYGON: 'MultiPolygon',
+        GEOMETRY_COLLECTION: 'GeometryCollection',
+        CIRCLE: 'Circle',
+    };
 
     /**
      * @module ol/events/Event
@@ -432,7 +366,7 @@
         return !property;
     }
 
-    var __extends$18 = (undefined && undefined.__extends) || (function () {
+    var __extends$19 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -464,7 +398,7 @@
      *    returns false.
      */
     var Target = /** @class */ (function (_super) {
-        __extends$18(Target, _super);
+        __extends$19(Target, _super);
         /**
          * @param {*=} opt_target Default event target for dispatched events.
          */
@@ -747,7 +681,7 @@
         }
     }
 
-    var __extends$17 = (undefined && undefined.__extends) || (function () {
+    var __extends$18 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -772,7 +706,7 @@
      * @api
      */
     var Observable = /** @class */ (function (_super) {
-        __extends$17(Observable, _super);
+        __extends$18(Observable, _super);
         function Observable() {
             var _this = _super.call(this) || this;
             /**
@@ -884,7 +818,42 @@
         }
     }
 
-    var __extends$16 = (undefined && undefined.__extends) || (function () {
+    /**
+     * @module ol/util
+     */
+    /**
+     * @return {?} Any return.
+     */
+    function abstract() {
+        return /** @type {?} */ ((function () {
+            throw new Error('Unimplemented abstract method.');
+        })());
+    }
+    /**
+     * Counter for getUid.
+     * @type {number}
+     * @private
+     */
+    var uidCounter_ = 0;
+    /**
+     * Gets a unique ID for an object. This mutates the object so that further calls
+     * with the same object as a parameter returns the same value. Unique IDs are generated
+     * as a strictly increasing sequence. Adapted from goog.getUid.
+     *
+     * @param {Object} obj The object to get the unique ID for.
+     * @return {string} The unique ID for the object.
+     * @api
+     */
+    function getUid(obj) {
+        return obj.ol_uid || (obj.ol_uid = String(++uidCounter_));
+    }
+    /**
+     * OpenLayers version.
+     * @type {string}
+     */
+    var VERSION = '6.5.0';
+
+    var __extends$17 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -902,7 +871,7 @@
      * Events emitted by {@link module:ol/Object~BaseObject} instances are instances of this type.
      */
     var ObjectEvent = /** @class */ (function (_super) {
-        __extends$16(ObjectEvent, _super);
+        __extends$17(ObjectEvent, _super);
         /**
          * @param {string} type The event type.
          * @param {string} key The property name.
@@ -971,7 +940,7 @@
      * @api
      */
     var BaseObject = /** @class */ (function (_super) {
-        __extends$16(BaseObject, _super);
+        __extends$17(BaseObject, _super);
         /**
          * @param {Object<string, *>=} opt_values An object with key-value pairs.
          */
@@ -1116,635 +1085,6 @@
     }
 
     /**
-     * @module ol/CollectionEventType
-     */
-    /**
-     * @enum {string}
-     */
-    var CollectionEventType = {
-        /**
-         * Triggered when an item is added to the collection.
-         * @event module:ol/Collection.CollectionEvent#add
-         * @api
-         */
-        ADD: 'add',
-        /**
-         * Triggered when an item is removed from the collection.
-         * @event module:ol/Collection.CollectionEvent#remove
-         * @api
-         */
-        REMOVE: 'remove',
-    };
-
-    var __extends$15 = (undefined && undefined.__extends) || (function () {
-        var extendStatics = function (d, b) {
-            extendStatics = Object.setPrototypeOf ||
-                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-            return extendStatics(d, b);
-        };
-        return function (d, b) {
-            extendStatics(d, b);
-            function __() { this.constructor = d; }
-            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-        };
-    })();
-    /**
-     * @enum {string}
-     * @private
-     */
-    var Property$2 = {
-        LENGTH: 'length',
-    };
-    /**
-     * @classdesc
-     * Events emitted by {@link module:ol/Collection~Collection} instances are instances of this
-     * type.
-     */
-    var CollectionEvent = /** @class */ (function (_super) {
-        __extends$15(CollectionEvent, _super);
-        /**
-         * @param {import("./CollectionEventType.js").default} type Type.
-         * @param {*=} opt_element Element.
-         * @param {number=} opt_index The index of the added or removed element.
-         */
-        function CollectionEvent(type, opt_element, opt_index) {
-            var _this = _super.call(this, type) || this;
-            /**
-             * The element that is added to or removed from the collection.
-             * @type {*}
-             * @api
-             */
-            _this.element = opt_element;
-            /**
-             * The index of the added or removed element.
-             * @type {number}
-             * @api
-             */
-            _this.index = opt_index;
-            return _this;
-        }
-        return CollectionEvent;
-    }(BaseEvent));
-    /**
-     * @typedef {Object} Options
-     * @property {boolean} [unique=false] Disallow the same item from being added to
-     * the collection twice.
-     */
-    /**
-     * @classdesc
-     * An expanded version of standard JS Array, adding convenience methods for
-     * manipulation. Add and remove changes to the Collection trigger a Collection
-     * event. Note that this does not cover changes to the objects _within_ the
-     * Collection; they trigger events on the appropriate object, not on the
-     * Collection as a whole.
-     *
-     * @fires CollectionEvent
-     *
-     * @template T
-     * @api
-     */
-    var Collection = /** @class */ (function (_super) {
-        __extends$15(Collection, _super);
-        /**
-         * @param {Array<T>=} opt_array Array.
-         * @param {Options=} opt_options Collection options.
-         */
-        function Collection(opt_array, opt_options) {
-            var _this = _super.call(this) || this;
-            var options = opt_options || {};
-            /**
-             * @private
-             * @type {boolean}
-             */
-            _this.unique_ = !!options.unique;
-            /**
-             * @private
-             * @type {!Array<T>}
-             */
-            _this.array_ = opt_array ? opt_array : [];
-            if (_this.unique_) {
-                for (var i = 0, ii = _this.array_.length; i < ii; ++i) {
-                    _this.assertUnique_(_this.array_[i], i);
-                }
-            }
-            _this.updateLength_();
-            return _this;
-        }
-        /**
-         * Remove all elements from the collection.
-         * @api
-         */
-        Collection.prototype.clear = function () {
-            while (this.getLength() > 0) {
-                this.pop();
-            }
-        };
-        /**
-         * Add elements to the collection.  This pushes each item in the provided array
-         * to the end of the collection.
-         * @param {!Array<T>} arr Array.
-         * @return {Collection<T>} This collection.
-         * @api
-         */
-        Collection.prototype.extend = function (arr) {
-            for (var i = 0, ii = arr.length; i < ii; ++i) {
-                this.push(arr[i]);
-            }
-            return this;
-        };
-        /**
-         * Iterate over each element, calling the provided callback.
-         * @param {function(T, number, Array<T>): *} f The function to call
-         *     for every element. This function takes 3 arguments (the element, the
-         *     index and the array). The return value is ignored.
-         * @api
-         */
-        Collection.prototype.forEach = function (f) {
-            var array = this.array_;
-            for (var i = 0, ii = array.length; i < ii; ++i) {
-                f(array[i], i, array);
-            }
-        };
-        /**
-         * Get a reference to the underlying Array object. Warning: if the array
-         * is mutated, no events will be dispatched by the collection, and the
-         * collection's "length" property won't be in sync with the actual length
-         * of the array.
-         * @return {!Array<T>} Array.
-         * @api
-         */
-        Collection.prototype.getArray = function () {
-            return this.array_;
-        };
-        /**
-         * Get the element at the provided index.
-         * @param {number} index Index.
-         * @return {T} Element.
-         * @api
-         */
-        Collection.prototype.item = function (index) {
-            return this.array_[index];
-        };
-        /**
-         * Get the length of this collection.
-         * @return {number} The length of the array.
-         * @observable
-         * @api
-         */
-        Collection.prototype.getLength = function () {
-            return this.get(Property$2.LENGTH);
-        };
-        /**
-         * Insert an element at the provided index.
-         * @param {number} index Index.
-         * @param {T} elem Element.
-         * @api
-         */
-        Collection.prototype.insertAt = function (index, elem) {
-            if (this.unique_) {
-                this.assertUnique_(elem);
-            }
-            this.array_.splice(index, 0, elem);
-            this.updateLength_();
-            this.dispatchEvent(new CollectionEvent(CollectionEventType.ADD, elem, index));
-        };
-        /**
-         * Remove the last element of the collection and return it.
-         * Return `undefined` if the collection is empty.
-         * @return {T|undefined} Element.
-         * @api
-         */
-        Collection.prototype.pop = function () {
-            return this.removeAt(this.getLength() - 1);
-        };
-        /**
-         * Insert the provided element at the end of the collection.
-         * @param {T} elem Element.
-         * @return {number} New length of the collection.
-         * @api
-         */
-        Collection.prototype.push = function (elem) {
-            if (this.unique_) {
-                this.assertUnique_(elem);
-            }
-            var n = this.getLength();
-            this.insertAt(n, elem);
-            return this.getLength();
-        };
-        /**
-         * Remove the first occurrence of an element from the collection.
-         * @param {T} elem Element.
-         * @return {T|undefined} The removed element or undefined if none found.
-         * @api
-         */
-        Collection.prototype.remove = function (elem) {
-            var arr = this.array_;
-            for (var i = 0, ii = arr.length; i < ii; ++i) {
-                if (arr[i] === elem) {
-                    return this.removeAt(i);
-                }
-            }
-            return undefined;
-        };
-        /**
-         * Remove the element at the provided index and return it.
-         * Return `undefined` if the collection does not contain this index.
-         * @param {number} index Index.
-         * @return {T|undefined} Value.
-         * @api
-         */
-        Collection.prototype.removeAt = function (index) {
-            var prev = this.array_[index];
-            this.array_.splice(index, 1);
-            this.updateLength_();
-            this.dispatchEvent(new CollectionEvent(CollectionEventType.REMOVE, prev, index));
-            return prev;
-        };
-        /**
-         * Set the element at the provided index.
-         * @param {number} index Index.
-         * @param {T} elem Element.
-         * @api
-         */
-        Collection.prototype.setAt = function (index, elem) {
-            var n = this.getLength();
-            if (index < n) {
-                if (this.unique_) {
-                    this.assertUnique_(elem, index);
-                }
-                var prev = this.array_[index];
-                this.array_[index] = elem;
-                this.dispatchEvent(new CollectionEvent(CollectionEventType.REMOVE, prev, index));
-                this.dispatchEvent(new CollectionEvent(CollectionEventType.ADD, elem, index));
-            }
-            else {
-                for (var j = n; j < index; ++j) {
-                    this.insertAt(j, undefined);
-                }
-                this.insertAt(index, elem);
-            }
-        };
-        /**
-         * @private
-         */
-        Collection.prototype.updateLength_ = function () {
-            this.set(Property$2.LENGTH, this.array_.length);
-        };
-        /**
-         * @private
-         * @param {T} elem Element.
-         * @param {number=} opt_except Optional index to ignore.
-         */
-        Collection.prototype.assertUnique_ = function (elem, opt_except) {
-            for (var i = 0, ii = this.array_.length; i < ii; ++i) {
-                if (this.array_[i] === elem && i !== opt_except) {
-                    throw new AssertionError(58);
-                }
-            }
-        };
-        return Collection;
-    }(BaseObject));
-
-    /**
-     * @module ol/asserts
-     */
-    /**
-     * @param {*} assertion Assertion we expected to be truthy.
-     * @param {number} errorCode Error code.
-     */
-    function assert(assertion, errorCode) {
-        if (!assertion) {
-            throw new AssertionError(errorCode);
-        }
-    }
-
-    var __extends$14 = (undefined && undefined.__extends) || (function () {
-        var extendStatics = function (d, b) {
-            extendStatics = Object.setPrototypeOf ||
-                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-            return extendStatics(d, b);
-        };
-        return function (d, b) {
-            extendStatics(d, b);
-            function __() { this.constructor = d; }
-            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-        };
-    })();
-    /**
-     * @typedef {typeof Feature|typeof import("./render/Feature.js").default} FeatureClass
-     */
-    /**
-     * @typedef {Feature|import("./render/Feature.js").default} FeatureLike
-     */
-    /**
-     * @classdesc
-     * A vector object for geographic features with a geometry and other
-     * attribute properties, similar to the features in vector file formats like
-     * GeoJSON.
-     *
-     * Features can be styled individually with `setStyle`; otherwise they use the
-     * style of their vector layer.
-     *
-     * Note that attribute properties are set as {@link module:ol/Object} properties on
-     * the feature object, so they are observable, and have get/set accessors.
-     *
-     * Typically, a feature has a single geometry property. You can set the
-     * geometry using the `setGeometry` method and get it with `getGeometry`.
-     * It is possible to store more than one geometry on a feature using attribute
-     * properties. By default, the geometry used for rendering is identified by
-     * the property name `geometry`. If you want to use another geometry property
-     * for rendering, use the `setGeometryName` method to change the attribute
-     * property associated with the geometry for the feature.  For example:
-     *
-     * ```js
-     *
-     * import Feature from 'ol/Feature';
-     * import Polygon from 'ol/geom/Polygon';
-     * import Point from 'ol/geom/Point';
-     *
-     * var feature = new Feature({
-     *   geometry: new Polygon(polyCoords),
-     *   labelPoint: new Point(labelCoords),
-     *   name: 'My Polygon'
-     * });
-     *
-     * // get the polygon geometry
-     * var poly = feature.getGeometry();
-     *
-     * // Render the feature as a point using the coordinates from labelPoint
-     * feature.setGeometryName('labelPoint');
-     *
-     * // get the point geometry
-     * var point = feature.getGeometry();
-     * ```
-     *
-     * @api
-     * @template {import("./geom/Geometry.js").default} Geometry
-     */
-    var Feature = /** @class */ (function (_super) {
-        __extends$14(Feature, _super);
-        /**
-         * @param {Geometry|Object<string, *>=} opt_geometryOrProperties
-         *     You may pass a Geometry object directly, or an object literal containing
-         *     properties. If you pass an object literal, you may include a Geometry
-         *     associated with a `geometry` key.
-         */
-        function Feature(opt_geometryOrProperties) {
-            var _this = _super.call(this) || this;
-            /**
-             * @private
-             * @type {number|string|undefined}
-             */
-            _this.id_ = undefined;
-            /**
-             * @type {string}
-             * @private
-             */
-            _this.geometryName_ = 'geometry';
-            /**
-             * User provided style.
-             * @private
-             * @type {import("./style/Style.js").StyleLike}
-             */
-            _this.style_ = null;
-            /**
-             * @private
-             * @type {import("./style/Style.js").StyleFunction|undefined}
-             */
-            _this.styleFunction_ = undefined;
-            /**
-             * @private
-             * @type {?import("./events.js").EventsKey}
-             */
-            _this.geometryChangeKey_ = null;
-            _this.addEventListener(getChangeEventType(_this.geometryName_), _this.handleGeometryChanged_);
-            if (opt_geometryOrProperties) {
-                if (typeof (
-                /** @type {?} */ (opt_geometryOrProperties).getSimplifiedGeometry) === 'function') {
-                    var geometry = /** @type {Geometry} */ (opt_geometryOrProperties);
-                    _this.setGeometry(geometry);
-                }
-                else {
-                    /** @type {Object<string, *>} */
-                    var properties = opt_geometryOrProperties;
-                    _this.setProperties(properties);
-                }
-            }
-            return _this;
-        }
-        /**
-         * Clone this feature. If the original feature has a geometry it
-         * is also cloned. The feature id is not set in the clone.
-         * @return {Feature} The clone.
-         * @api
-         */
-        Feature.prototype.clone = function () {
-            var clone = new Feature(this.hasProperties() ? this.getProperties() : null);
-            clone.setGeometryName(this.getGeometryName());
-            var geometry = this.getGeometry();
-            if (geometry) {
-                clone.setGeometry(geometry.clone());
-            }
-            var style = this.getStyle();
-            if (style) {
-                clone.setStyle(style);
-            }
-            return clone;
-        };
-        /**
-         * Get the feature's default geometry.  A feature may have any number of named
-         * geometries.  The "default" geometry (the one that is rendered by default) is
-         * set when calling {@link module:ol/Feature~Feature#setGeometry}.
-         * @return {Geometry|undefined} The default geometry for the feature.
-         * @api
-         * @observable
-         */
-        Feature.prototype.getGeometry = function () {
-            return /** @type {Geometry|undefined} */ (this.get(this.geometryName_));
-        };
-        /**
-         * Get the feature identifier.  This is a stable identifier for the feature and
-         * is either set when reading data from a remote source or set explicitly by
-         * calling {@link module:ol/Feature~Feature#setId}.
-         * @return {number|string|undefined} Id.
-         * @api
-         */
-        Feature.prototype.getId = function () {
-            return this.id_;
-        };
-        /**
-         * Get the name of the feature's default geometry.  By default, the default
-         * geometry is named `geometry`.
-         * @return {string} Get the property name associated with the default geometry
-         *     for this feature.
-         * @api
-         */
-        Feature.prototype.getGeometryName = function () {
-            return this.geometryName_;
-        };
-        /**
-         * Get the feature's style. Will return what was provided to the
-         * {@link module:ol/Feature~Feature#setStyle} method.
-         * @return {import("./style/Style.js").StyleLike|undefined} The feature style.
-         * @api
-         */
-        Feature.prototype.getStyle = function () {
-            return this.style_;
-        };
-        /**
-         * Get the feature's style function.
-         * @return {import("./style/Style.js").StyleFunction|undefined} Return a function
-         * representing the current style of this feature.
-         * @api
-         */
-        Feature.prototype.getStyleFunction = function () {
-            return this.styleFunction_;
-        };
-        /**
-         * @private
-         */
-        Feature.prototype.handleGeometryChange_ = function () {
-            this.changed();
-        };
-        /**
-         * @private
-         */
-        Feature.prototype.handleGeometryChanged_ = function () {
-            if (this.geometryChangeKey_) {
-                unlistenByKey(this.geometryChangeKey_);
-                this.geometryChangeKey_ = null;
-            }
-            var geometry = this.getGeometry();
-            if (geometry) {
-                this.geometryChangeKey_ = listen(geometry, EventType.CHANGE, this.handleGeometryChange_, this);
-            }
-            this.changed();
-        };
-        /**
-         * Set the default geometry for the feature.  This will update the property
-         * with the name returned by {@link module:ol/Feature~Feature#getGeometryName}.
-         * @param {Geometry|undefined} geometry The new geometry.
-         * @api
-         * @observable
-         */
-        Feature.prototype.setGeometry = function (geometry) {
-            this.set(this.geometryName_, geometry);
-        };
-        /**
-         * Set the style for the feature to override the layer style.  This can be a
-         * single style object, an array of styles, or a function that takes a
-         * resolution and returns an array of styles. To unset the feature style, call
-         * `setStyle()` without arguments or a falsey value.
-         * @param {import("./style/Style.js").StyleLike=} opt_style Style for this feature.
-         * @api
-         * @fires module:ol/events/Event~BaseEvent#event:change
-         */
-        Feature.prototype.setStyle = function (opt_style) {
-            this.style_ = opt_style;
-            this.styleFunction_ = !opt_style
-                ? undefined
-                : createStyleFunction(opt_style);
-            this.changed();
-        };
-        /**
-         * Set the feature id.  The feature id is considered stable and may be used when
-         * requesting features or comparing identifiers returned from a remote source.
-         * The feature id can be used with the
-         * {@link module:ol/source/Vector~VectorSource#getFeatureById} method.
-         * @param {number|string|undefined} id The feature id.
-         * @api
-         * @fires module:ol/events/Event~BaseEvent#event:change
-         */
-        Feature.prototype.setId = function (id) {
-            this.id_ = id;
-            this.changed();
-        };
-        /**
-         * Set the property name to be used when getting the feature's default geometry.
-         * When calling {@link module:ol/Feature~Feature#getGeometry}, the value of the property with
-         * this name will be returned.
-         * @param {string} name The property name of the default geometry.
-         * @api
-         */
-        Feature.prototype.setGeometryName = function (name) {
-            this.removeEventListener(getChangeEventType(this.geometryName_), this.handleGeometryChanged_);
-            this.geometryName_ = name;
-            this.addEventListener(getChangeEventType(this.geometryName_), this.handleGeometryChanged_);
-            this.handleGeometryChanged_();
-        };
-        return Feature;
-    }(BaseObject));
-    /**
-     * Convert the provided object into a feature style function.  Functions passed
-     * through unchanged.  Arrays of Style or single style objects wrapped
-     * in a new feature style function.
-     * @param {!import("./style/Style.js").StyleFunction|!Array<import("./style/Style.js").default>|!import("./style/Style.js").default} obj
-     *     A feature style function, a single style, or an array of styles.
-     * @return {import("./style/Style.js").StyleFunction} A style function.
-     */
-    function createStyleFunction(obj) {
-        if (typeof obj === 'function') {
-            return obj;
-        }
-        else {
-            /**
-             * @type {Array<import("./style/Style.js").default>}
-             */
-            var styles_1;
-            if (Array.isArray(obj)) {
-                styles_1 = obj;
-            }
-            else {
-                assert(typeof ( /** @type {?} */(obj).getZIndex) === 'function', 41); // Expected an `import("./style/Style.js").Style` or an array of `import("./style/Style.js").Style`
-                var style = /** @type {import("./style/Style.js").default} */ (obj);
-                styles_1 = [style];
-            }
-            return function () {
-                return styles_1;
-            };
-        }
-    }
-
-    /**
-     * @module ol/geom/GeometryLayout
-     */
-    /**
-     * The coordinate layout for geometries, indicating whether a 3rd or 4th z ('Z')
-     * or measure ('M') coordinate is available. Supported values are `'XY'`,
-     * `'XYZ'`, `'XYM'`, `'XYZM'`.
-     * @enum {string}
-     */
-    var GeometryLayout = {
-        XY: 'XY',
-        XYZ: 'XYZ',
-        XYM: 'XYM',
-        XYZM: 'XYZM',
-    };
-
-    /**
-     * @module ol/geom/GeometryType
-     */
-    /**
-     * The geometry type. One of `'Point'`, `'LineString'`, `'LinearRing'`,
-     * `'Polygon'`, `'MultiPoint'`, `'MultiLineString'`, `'MultiPolygon'`,
-     * `'GeometryCollection'`, `'Circle'`.
-     * @enum {string}
-     */
-    var GeometryType = {
-        POINT: 'Point',
-        LINE_STRING: 'LineString',
-        LINEAR_RING: 'LinearRing',
-        POLYGON: 'Polygon',
-        MULTI_POINT: 'MultiPoint',
-        MULTI_LINE_STRING: 'MultiLineString',
-        MULTI_POLYGON: 'MultiPolygon',
-        GEOMETRY_COLLECTION: 'GeometryCollection',
-        CIRCLE: 'Circle',
-    };
-
-    /**
      * @module ol/proj/Units
      */
     /**
@@ -1796,6 +1136,71 @@
     METERS_PER_UNIT$1[Units.FEET] = 0.3048;
     METERS_PER_UNIT$1[Units.METERS] = 1;
     METERS_PER_UNIT$1[Units.USFEET] = 1200 / 3937;
+
+    var __extends$16 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = function (d, b) {
+            extendStatics = Object.setPrototypeOf ||
+                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+            return extendStatics(d, b);
+        };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /**
+     * Error object thrown when an assertion failed. This is an ECMA-262 Error,
+     * extended with a `code` property.
+     * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error.
+     */
+    var AssertionError = /** @class */ (function (_super) {
+        __extends$16(AssertionError, _super);
+        /**
+         * @param {number} code Error code.
+         */
+        function AssertionError(code) {
+            var _this = this;
+            var path = 'v' + VERSION.split('-')[0];
+            var message = 'Assertion failed. See https://openlayers.org/en/' +
+                path +
+                '/doc/errors/#' +
+                code +
+                ' for details.';
+            _this = _super.call(this, message) || this;
+            /**
+             * Error code. The meaning of the code can be found on
+             * https://openlayers.org/en/latest/doc/errors/ (replace `latest` with
+             * the version found in the OpenLayers script's header comment if a version
+             * other than the latest is used).
+             * @type {number}
+             * @api
+             */
+            _this.code = code;
+            /**
+             * @type {string}
+             */
+            _this.name = 'AssertionError';
+            // Re-assign message, see https://github.com/Rich-Harris/buble/issues/40
+            _this.message = message;
+            return _this;
+        }
+        return AssertionError;
+    }(Error));
+
+    /**
+     * @module ol/asserts
+     */
+    /**
+     * @param {*} assertion Assertion we expected to be truthy.
+     * @param {number} errorCode Error code.
+     */
+    function assert(assertion, errorCode) {
+        if (!assertion) {
+            throw new AssertionError(errorCode);
+        }
+    }
 
     /**
      * @module ol/transform
@@ -3070,7 +2475,7 @@
         return a + x * (b - a);
     }
 
-    var __extends$13 = (undefined && undefined.__extends) || (function () {
+    var __extends$15 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3116,7 +2521,7 @@
      * Projection object for web/spherical Mercator (EPSG:3857).
      */
     var EPSG3857Projection = /** @class */ (function (_super) {
-        __extends$13(EPSG3857Projection, _super);
+        __extends$15(EPSG3857Projection, _super);
         /**
          * @param {string} code Code.
          */
@@ -3210,7 +2615,7 @@
         return output;
     }
 
-    var __extends$12 = (undefined && undefined.__extends) || (function () {
+    var __extends$14 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -3251,7 +2656,7 @@
      * OpenLayers treats EPSG:4326 as a pseudo-projection, with x,y coordinates.
      */
     var EPSG4326Projection = /** @class */ (function (_super) {
-        __extends$12(EPSG4326Projection, _super);
+        __extends$14(EPSG4326Projection, _super);
         /**
          * @param {string} code Code.
          * @param {string=} opt_axisOrientation Axis orientation.
@@ -4002,7 +3407,7 @@
         return dest;
     }
 
-    var __extends$11 = (undefined && undefined.__extends) || (function () {
+    var __extends$13 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -4032,7 +3437,7 @@
      * @api
      */
     var Geometry = /** @class */ (function (_super) {
-        __extends$11(Geometry, _super);
+        __extends$13(Geometry, _super);
         function Geometry() {
             var _this = _super.call(this) || this;
             /**
@@ -4280,7 +3685,23 @@
         return Geometry;
     }(BaseObject));
 
-    var __extends$10 = (undefined && undefined.__extends) || (function () {
+    /**
+     * @module ol/geom/GeometryLayout
+     */
+    /**
+     * The coordinate layout for geometries, indicating whether a 3rd or 4th z ('Z')
+     * or measure ('M') coordinate is available. Supported values are `'XY'`,
+     * `'XYZ'`, `'XYM'`, `'XYZM'`.
+     * @enum {string}
+     */
+    var GeometryLayout = {
+        XY: 'XY',
+        XYZ: 'XYZ',
+        XYM: 'XYM',
+        XYZM: 'XYZM',
+    };
+
+    var __extends$12 = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -4302,7 +3723,7 @@
      * @api
      */
     var SimpleGeometry = /** @class */ (function (_super) {
-        __extends$10(SimpleGeometry, _super);
+        __extends$12(SimpleGeometry, _super);
         function SimpleGeometry() {
             var _this = _super.call(this) || this;
             /**
@@ -4584,6 +4005,748 @@
     }
 
     /**
+     * @module ol/geom/flat/deflate
+     */
+    /**
+     * @param {Array<number>} flatCoordinates Flat coordinates.
+     * @param {number} offset Offset.
+     * @param {import("../../coordinate.js").Coordinate} coordinate Coordinate.
+     * @param {number} stride Stride.
+     * @return {number} offset Offset.
+     */
+    function deflateCoordinate(flatCoordinates, offset, coordinate, stride) {
+        for (var i = 0, ii = coordinate.length; i < ii; ++i) {
+            flatCoordinates[offset++] = coordinate[i];
+        }
+        return offset;
+    }
+    /**
+     * @param {Array<number>} flatCoordinates Flat coordinates.
+     * @param {number} offset Offset.
+     * @param {Array<import("../../coordinate.js").Coordinate>} coordinates Coordinates.
+     * @param {number} stride Stride.
+     * @return {number} offset Offset.
+     */
+    function deflateCoordinates(flatCoordinates, offset, coordinates, stride) {
+        for (var i = 0, ii = coordinates.length; i < ii; ++i) {
+            var coordinate = coordinates[i];
+            for (var j = 0; j < stride; ++j) {
+                flatCoordinates[offset++] = coordinate[j];
+            }
+        }
+        return offset;
+    }
+    /**
+     * @param {Array<number>} flatCoordinates Flat coordinates.
+     * @param {number} offset Offset.
+     * @param {Array<Array<import("../../coordinate.js").Coordinate>>} coordinatess Coordinatess.
+     * @param {number} stride Stride.
+     * @param {Array<number>=} opt_ends Ends.
+     * @return {Array<number>} Ends.
+     */
+    function deflateCoordinatesArray(flatCoordinates, offset, coordinatess, stride, opt_ends) {
+        var ends = opt_ends ? opt_ends : [];
+        var i = 0;
+        for (var j = 0, jj = coordinatess.length; j < jj; ++j) {
+            var end = deflateCoordinates(flatCoordinates, offset, coordinatess[j], stride);
+            ends[i++] = end;
+            offset = end;
+        }
+        ends.length = i;
+        return ends;
+    }
+
+    var __extends$11 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = function (d, b) {
+            extendStatics = Object.setPrototypeOf ||
+                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+            return extendStatics(d, b);
+        };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /**
+     * @classdesc
+     * Point geometry.
+     *
+     * @api
+     */
+    var Point = /** @class */ (function (_super) {
+        __extends$11(Point, _super);
+        /**
+         * @param {import("../coordinate.js").Coordinate} coordinates Coordinates.
+         * @param {import("./GeometryLayout.js").default=} opt_layout Layout.
+         */
+        function Point(coordinates, opt_layout) {
+            var _this = _super.call(this) || this;
+            _this.setCoordinates(coordinates, opt_layout);
+            return _this;
+        }
+        /**
+         * Make a complete copy of the geometry.
+         * @return {!Point} Clone.
+         * @api
+         */
+        Point.prototype.clone = function () {
+            var point = new Point(this.flatCoordinates.slice(), this.layout);
+            point.applyProperties(this);
+            return point;
+        };
+        /**
+         * @param {number} x X.
+         * @param {number} y Y.
+         * @param {import("../coordinate.js").Coordinate} closestPoint Closest point.
+         * @param {number} minSquaredDistance Minimum squared distance.
+         * @return {number} Minimum squared distance.
+         */
+        Point.prototype.closestPointXY = function (x, y, closestPoint, minSquaredDistance) {
+            var flatCoordinates = this.flatCoordinates;
+            var squaredDistance$1 = squaredDistance(x, y, flatCoordinates[0], flatCoordinates[1]);
+            if (squaredDistance$1 < minSquaredDistance) {
+                var stride = this.stride;
+                for (var i = 0; i < stride; ++i) {
+                    closestPoint[i] = flatCoordinates[i];
+                }
+                closestPoint.length = stride;
+                return squaredDistance$1;
+            }
+            else {
+                return minSquaredDistance;
+            }
+        };
+        /**
+         * Return the coordinate of the point.
+         * @return {import("../coordinate.js").Coordinate} Coordinates.
+         * @api
+         */
+        Point.prototype.getCoordinates = function () {
+            return !this.flatCoordinates ? [] : this.flatCoordinates.slice();
+        };
+        /**
+         * @param {import("../extent.js").Extent} extent Extent.
+         * @protected
+         * @return {import("../extent.js").Extent} extent Extent.
+         */
+        Point.prototype.computeExtent = function (extent) {
+            return createOrUpdateFromCoordinate(this.flatCoordinates, extent);
+        };
+        /**
+         * Get the type of this geometry.
+         * @return {import("./GeometryType.js").default} Geometry type.
+         * @api
+         */
+        Point.prototype.getType = function () {
+            return GeometryType.POINT;
+        };
+        /**
+         * Test if the geometry and the passed extent intersect.
+         * @param {import("../extent.js").Extent} extent Extent.
+         * @return {boolean} `true` if the geometry and the extent intersect.
+         * @api
+         */
+        Point.prototype.intersectsExtent = function (extent) {
+            return containsXY(extent, this.flatCoordinates[0], this.flatCoordinates[1]);
+        };
+        /**
+         * @param {!Array<*>} coordinates Coordinates.
+         * @param {import("./GeometryLayout.js").default=} opt_layout Layout.
+         * @api
+         */
+        Point.prototype.setCoordinates = function (coordinates, opt_layout) {
+            this.setLayout(opt_layout, coordinates, 0);
+            if (!this.flatCoordinates) {
+                this.flatCoordinates = [];
+            }
+            this.flatCoordinates.length = deflateCoordinate(this.flatCoordinates, 0, coordinates, this.stride);
+            this.changed();
+        };
+        return Point;
+    }(SimpleGeometry));
+
+    /**
+     * @module ol/CollectionEventType
+     */
+    /**
+     * @enum {string}
+     */
+    var CollectionEventType = {
+        /**
+         * Triggered when an item is added to the collection.
+         * @event module:ol/Collection.CollectionEvent#add
+         * @api
+         */
+        ADD: 'add',
+        /**
+         * Triggered when an item is removed from the collection.
+         * @event module:ol/Collection.CollectionEvent#remove
+         * @api
+         */
+        REMOVE: 'remove',
+    };
+
+    var __extends$10 = (undefined && undefined.__extends) || (function () {
+        var extendStatics = function (d, b) {
+            extendStatics = Object.setPrototypeOf ||
+                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+            return extendStatics(d, b);
+        };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /**
+     * @enum {string}
+     * @private
+     */
+    var Property$2 = {
+        LENGTH: 'length',
+    };
+    /**
+     * @classdesc
+     * Events emitted by {@link module:ol/Collection~Collection} instances are instances of this
+     * type.
+     */
+    var CollectionEvent = /** @class */ (function (_super) {
+        __extends$10(CollectionEvent, _super);
+        /**
+         * @param {import("./CollectionEventType.js").default} type Type.
+         * @param {*=} opt_element Element.
+         * @param {number=} opt_index The index of the added or removed element.
+         */
+        function CollectionEvent(type, opt_element, opt_index) {
+            var _this = _super.call(this, type) || this;
+            /**
+             * The element that is added to or removed from the collection.
+             * @type {*}
+             * @api
+             */
+            _this.element = opt_element;
+            /**
+             * The index of the added or removed element.
+             * @type {number}
+             * @api
+             */
+            _this.index = opt_index;
+            return _this;
+        }
+        return CollectionEvent;
+    }(BaseEvent));
+    /**
+     * @typedef {Object} Options
+     * @property {boolean} [unique=false] Disallow the same item from being added to
+     * the collection twice.
+     */
+    /**
+     * @classdesc
+     * An expanded version of standard JS Array, adding convenience methods for
+     * manipulation. Add and remove changes to the Collection trigger a Collection
+     * event. Note that this does not cover changes to the objects _within_ the
+     * Collection; they trigger events on the appropriate object, not on the
+     * Collection as a whole.
+     *
+     * @fires CollectionEvent
+     *
+     * @template T
+     * @api
+     */
+    var Collection = /** @class */ (function (_super) {
+        __extends$10(Collection, _super);
+        /**
+         * @param {Array<T>=} opt_array Array.
+         * @param {Options=} opt_options Collection options.
+         */
+        function Collection(opt_array, opt_options) {
+            var _this = _super.call(this) || this;
+            var options = opt_options || {};
+            /**
+             * @private
+             * @type {boolean}
+             */
+            _this.unique_ = !!options.unique;
+            /**
+             * @private
+             * @type {!Array<T>}
+             */
+            _this.array_ = opt_array ? opt_array : [];
+            if (_this.unique_) {
+                for (var i = 0, ii = _this.array_.length; i < ii; ++i) {
+                    _this.assertUnique_(_this.array_[i], i);
+                }
+            }
+            _this.updateLength_();
+            return _this;
+        }
+        /**
+         * Remove all elements from the collection.
+         * @api
+         */
+        Collection.prototype.clear = function () {
+            while (this.getLength() > 0) {
+                this.pop();
+            }
+        };
+        /**
+         * Add elements to the collection.  This pushes each item in the provided array
+         * to the end of the collection.
+         * @param {!Array<T>} arr Array.
+         * @return {Collection<T>} This collection.
+         * @api
+         */
+        Collection.prototype.extend = function (arr) {
+            for (var i = 0, ii = arr.length; i < ii; ++i) {
+                this.push(arr[i]);
+            }
+            return this;
+        };
+        /**
+         * Iterate over each element, calling the provided callback.
+         * @param {function(T, number, Array<T>): *} f The function to call
+         *     for every element. This function takes 3 arguments (the element, the
+         *     index and the array). The return value is ignored.
+         * @api
+         */
+        Collection.prototype.forEach = function (f) {
+            var array = this.array_;
+            for (var i = 0, ii = array.length; i < ii; ++i) {
+                f(array[i], i, array);
+            }
+        };
+        /**
+         * Get a reference to the underlying Array object. Warning: if the array
+         * is mutated, no events will be dispatched by the collection, and the
+         * collection's "length" property won't be in sync with the actual length
+         * of the array.
+         * @return {!Array<T>} Array.
+         * @api
+         */
+        Collection.prototype.getArray = function () {
+            return this.array_;
+        };
+        /**
+         * Get the element at the provided index.
+         * @param {number} index Index.
+         * @return {T} Element.
+         * @api
+         */
+        Collection.prototype.item = function (index) {
+            return this.array_[index];
+        };
+        /**
+         * Get the length of this collection.
+         * @return {number} The length of the array.
+         * @observable
+         * @api
+         */
+        Collection.prototype.getLength = function () {
+            return this.get(Property$2.LENGTH);
+        };
+        /**
+         * Insert an element at the provided index.
+         * @param {number} index Index.
+         * @param {T} elem Element.
+         * @api
+         */
+        Collection.prototype.insertAt = function (index, elem) {
+            if (this.unique_) {
+                this.assertUnique_(elem);
+            }
+            this.array_.splice(index, 0, elem);
+            this.updateLength_();
+            this.dispatchEvent(new CollectionEvent(CollectionEventType.ADD, elem, index));
+        };
+        /**
+         * Remove the last element of the collection and return it.
+         * Return `undefined` if the collection is empty.
+         * @return {T|undefined} Element.
+         * @api
+         */
+        Collection.prototype.pop = function () {
+            return this.removeAt(this.getLength() - 1);
+        };
+        /**
+         * Insert the provided element at the end of the collection.
+         * @param {T} elem Element.
+         * @return {number} New length of the collection.
+         * @api
+         */
+        Collection.prototype.push = function (elem) {
+            if (this.unique_) {
+                this.assertUnique_(elem);
+            }
+            var n = this.getLength();
+            this.insertAt(n, elem);
+            return this.getLength();
+        };
+        /**
+         * Remove the first occurrence of an element from the collection.
+         * @param {T} elem Element.
+         * @return {T|undefined} The removed element or undefined if none found.
+         * @api
+         */
+        Collection.prototype.remove = function (elem) {
+            var arr = this.array_;
+            for (var i = 0, ii = arr.length; i < ii; ++i) {
+                if (arr[i] === elem) {
+                    return this.removeAt(i);
+                }
+            }
+            return undefined;
+        };
+        /**
+         * Remove the element at the provided index and return it.
+         * Return `undefined` if the collection does not contain this index.
+         * @param {number} index Index.
+         * @return {T|undefined} Value.
+         * @api
+         */
+        Collection.prototype.removeAt = function (index) {
+            var prev = this.array_[index];
+            this.array_.splice(index, 1);
+            this.updateLength_();
+            this.dispatchEvent(new CollectionEvent(CollectionEventType.REMOVE, prev, index));
+            return prev;
+        };
+        /**
+         * Set the element at the provided index.
+         * @param {number} index Index.
+         * @param {T} elem Element.
+         * @api
+         */
+        Collection.prototype.setAt = function (index, elem) {
+            var n = this.getLength();
+            if (index < n) {
+                if (this.unique_) {
+                    this.assertUnique_(elem, index);
+                }
+                var prev = this.array_[index];
+                this.array_[index] = elem;
+                this.dispatchEvent(new CollectionEvent(CollectionEventType.REMOVE, prev, index));
+                this.dispatchEvent(new CollectionEvent(CollectionEventType.ADD, elem, index));
+            }
+            else {
+                for (var j = n; j < index; ++j) {
+                    this.insertAt(j, undefined);
+                }
+                this.insertAt(index, elem);
+            }
+        };
+        /**
+         * @private
+         */
+        Collection.prototype.updateLength_ = function () {
+            this.set(Property$2.LENGTH, this.array_.length);
+        };
+        /**
+         * @private
+         * @param {T} elem Element.
+         * @param {number=} opt_except Optional index to ignore.
+         */
+        Collection.prototype.assertUnique_ = function (elem, opt_except) {
+            for (var i = 0, ii = this.array_.length; i < ii; ++i) {
+                if (this.array_[i] === elem && i !== opt_except) {
+                    throw new AssertionError(58);
+                }
+            }
+        };
+        return Collection;
+    }(BaseObject));
+
+    var __extends$$ = (undefined && undefined.__extends) || (function () {
+        var extendStatics = function (d, b) {
+            extendStatics = Object.setPrototypeOf ||
+                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+            return extendStatics(d, b);
+        };
+        return function (d, b) {
+            extendStatics(d, b);
+            function __() { this.constructor = d; }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    })();
+    /**
+     * @typedef {typeof Feature|typeof import("./render/Feature.js").default} FeatureClass
+     */
+    /**
+     * @typedef {Feature|import("./render/Feature.js").default} FeatureLike
+     */
+    /**
+     * @classdesc
+     * A vector object for geographic features with a geometry and other
+     * attribute properties, similar to the features in vector file formats like
+     * GeoJSON.
+     *
+     * Features can be styled individually with `setStyle`; otherwise they use the
+     * style of their vector layer.
+     *
+     * Note that attribute properties are set as {@link module:ol/Object} properties on
+     * the feature object, so they are observable, and have get/set accessors.
+     *
+     * Typically, a feature has a single geometry property. You can set the
+     * geometry using the `setGeometry` method and get it with `getGeometry`.
+     * It is possible to store more than one geometry on a feature using attribute
+     * properties. By default, the geometry used for rendering is identified by
+     * the property name `geometry`. If you want to use another geometry property
+     * for rendering, use the `setGeometryName` method to change the attribute
+     * property associated with the geometry for the feature.  For example:
+     *
+     * ```js
+     *
+     * import Feature from 'ol/Feature';
+     * import Polygon from 'ol/geom/Polygon';
+     * import Point from 'ol/geom/Point';
+     *
+     * var feature = new Feature({
+     *   geometry: new Polygon(polyCoords),
+     *   labelPoint: new Point(labelCoords),
+     *   name: 'My Polygon'
+     * });
+     *
+     * // get the polygon geometry
+     * var poly = feature.getGeometry();
+     *
+     * // Render the feature as a point using the coordinates from labelPoint
+     * feature.setGeometryName('labelPoint');
+     *
+     * // get the point geometry
+     * var point = feature.getGeometry();
+     * ```
+     *
+     * @api
+     * @template {import("./geom/Geometry.js").default} Geometry
+     */
+    var Feature = /** @class */ (function (_super) {
+        __extends$$(Feature, _super);
+        /**
+         * @param {Geometry|Object<string, *>=} opt_geometryOrProperties
+         *     You may pass a Geometry object directly, or an object literal containing
+         *     properties. If you pass an object literal, you may include a Geometry
+         *     associated with a `geometry` key.
+         */
+        function Feature(opt_geometryOrProperties) {
+            var _this = _super.call(this) || this;
+            /**
+             * @private
+             * @type {number|string|undefined}
+             */
+            _this.id_ = undefined;
+            /**
+             * @type {string}
+             * @private
+             */
+            _this.geometryName_ = 'geometry';
+            /**
+             * User provided style.
+             * @private
+             * @type {import("./style/Style.js").StyleLike}
+             */
+            _this.style_ = null;
+            /**
+             * @private
+             * @type {import("./style/Style.js").StyleFunction|undefined}
+             */
+            _this.styleFunction_ = undefined;
+            /**
+             * @private
+             * @type {?import("./events.js").EventsKey}
+             */
+            _this.geometryChangeKey_ = null;
+            _this.addEventListener(getChangeEventType(_this.geometryName_), _this.handleGeometryChanged_);
+            if (opt_geometryOrProperties) {
+                if (typeof (
+                /** @type {?} */ (opt_geometryOrProperties).getSimplifiedGeometry) === 'function') {
+                    var geometry = /** @type {Geometry} */ (opt_geometryOrProperties);
+                    _this.setGeometry(geometry);
+                }
+                else {
+                    /** @type {Object<string, *>} */
+                    var properties = opt_geometryOrProperties;
+                    _this.setProperties(properties);
+                }
+            }
+            return _this;
+        }
+        /**
+         * Clone this feature. If the original feature has a geometry it
+         * is also cloned. The feature id is not set in the clone.
+         * @return {Feature} The clone.
+         * @api
+         */
+        Feature.prototype.clone = function () {
+            var clone = new Feature(this.hasProperties() ? this.getProperties() : null);
+            clone.setGeometryName(this.getGeometryName());
+            var geometry = this.getGeometry();
+            if (geometry) {
+                clone.setGeometry(geometry.clone());
+            }
+            var style = this.getStyle();
+            if (style) {
+                clone.setStyle(style);
+            }
+            return clone;
+        };
+        /**
+         * Get the feature's default geometry.  A feature may have any number of named
+         * geometries.  The "default" geometry (the one that is rendered by default) is
+         * set when calling {@link module:ol/Feature~Feature#setGeometry}.
+         * @return {Geometry|undefined} The default geometry for the feature.
+         * @api
+         * @observable
+         */
+        Feature.prototype.getGeometry = function () {
+            return /** @type {Geometry|undefined} */ (this.get(this.geometryName_));
+        };
+        /**
+         * Get the feature identifier.  This is a stable identifier for the feature and
+         * is either set when reading data from a remote source or set explicitly by
+         * calling {@link module:ol/Feature~Feature#setId}.
+         * @return {number|string|undefined} Id.
+         * @api
+         */
+        Feature.prototype.getId = function () {
+            return this.id_;
+        };
+        /**
+         * Get the name of the feature's default geometry.  By default, the default
+         * geometry is named `geometry`.
+         * @return {string} Get the property name associated with the default geometry
+         *     for this feature.
+         * @api
+         */
+        Feature.prototype.getGeometryName = function () {
+            return this.geometryName_;
+        };
+        /**
+         * Get the feature's style. Will return what was provided to the
+         * {@link module:ol/Feature~Feature#setStyle} method.
+         * @return {import("./style/Style.js").StyleLike|undefined} The feature style.
+         * @api
+         */
+        Feature.prototype.getStyle = function () {
+            return this.style_;
+        };
+        /**
+         * Get the feature's style function.
+         * @return {import("./style/Style.js").StyleFunction|undefined} Return a function
+         * representing the current style of this feature.
+         * @api
+         */
+        Feature.prototype.getStyleFunction = function () {
+            return this.styleFunction_;
+        };
+        /**
+         * @private
+         */
+        Feature.prototype.handleGeometryChange_ = function () {
+            this.changed();
+        };
+        /**
+         * @private
+         */
+        Feature.prototype.handleGeometryChanged_ = function () {
+            if (this.geometryChangeKey_) {
+                unlistenByKey(this.geometryChangeKey_);
+                this.geometryChangeKey_ = null;
+            }
+            var geometry = this.getGeometry();
+            if (geometry) {
+                this.geometryChangeKey_ = listen(geometry, EventType.CHANGE, this.handleGeometryChange_, this);
+            }
+            this.changed();
+        };
+        /**
+         * Set the default geometry for the feature.  This will update the property
+         * with the name returned by {@link module:ol/Feature~Feature#getGeometryName}.
+         * @param {Geometry|undefined} geometry The new geometry.
+         * @api
+         * @observable
+         */
+        Feature.prototype.setGeometry = function (geometry) {
+            this.set(this.geometryName_, geometry);
+        };
+        /**
+         * Set the style for the feature to override the layer style.  This can be a
+         * single style object, an array of styles, or a function that takes a
+         * resolution and returns an array of styles. To unset the feature style, call
+         * `setStyle()` without arguments or a falsey value.
+         * @param {import("./style/Style.js").StyleLike=} opt_style Style for this feature.
+         * @api
+         * @fires module:ol/events/Event~BaseEvent#event:change
+         */
+        Feature.prototype.setStyle = function (opt_style) {
+            this.style_ = opt_style;
+            this.styleFunction_ = !opt_style
+                ? undefined
+                : createStyleFunction(opt_style);
+            this.changed();
+        };
+        /**
+         * Set the feature id.  The feature id is considered stable and may be used when
+         * requesting features or comparing identifiers returned from a remote source.
+         * The feature id can be used with the
+         * {@link module:ol/source/Vector~VectorSource#getFeatureById} method.
+         * @param {number|string|undefined} id The feature id.
+         * @api
+         * @fires module:ol/events/Event~BaseEvent#event:change
+         */
+        Feature.prototype.setId = function (id) {
+            this.id_ = id;
+            this.changed();
+        };
+        /**
+         * Set the property name to be used when getting the feature's default geometry.
+         * When calling {@link module:ol/Feature~Feature#getGeometry}, the value of the property with
+         * this name will be returned.
+         * @param {string} name The property name of the default geometry.
+         * @api
+         */
+        Feature.prototype.setGeometryName = function (name) {
+            this.removeEventListener(getChangeEventType(this.geometryName_), this.handleGeometryChanged_);
+            this.geometryName_ = name;
+            this.addEventListener(getChangeEventType(this.geometryName_), this.handleGeometryChanged_);
+            this.handleGeometryChanged_();
+        };
+        return Feature;
+    }(BaseObject));
+    /**
+     * Convert the provided object into a feature style function.  Functions passed
+     * through unchanged.  Arrays of Style or single style objects wrapped
+     * in a new feature style function.
+     * @param {!import("./style/Style.js").StyleFunction|!Array<import("./style/Style.js").default>|!import("./style/Style.js").default} obj
+     *     A feature style function, a single style, or an array of styles.
+     * @return {import("./style/Style.js").StyleFunction} A style function.
+     */
+    function createStyleFunction(obj) {
+        if (typeof obj === 'function') {
+            return obj;
+        }
+        else {
+            /**
+             * @type {Array<import("./style/Style.js").default>}
+             */
+            var styles_1;
+            if (Array.isArray(obj)) {
+                styles_1 = obj;
+            }
+            else {
+                assert(typeof ( /** @type {?} */(obj).getZIndex) === 'function', 41); // Expected an `import("./style/Style.js").Style` or an array of `import("./style/Style.js").Style`
+                var style = /** @type {import("./style/Style.js").default} */ (obj);
+                styles_1 = [style];
+            }
+            return function () {
+                return styles_1;
+            };
+        }
+    }
+
+    /**
      * @module ol/geom/flat/closest
      */
     /**
@@ -4769,58 +4932,6 @@
             offset = end;
         }
         return minSquaredDistance;
-    }
-
-    /**
-     * @module ol/geom/flat/deflate
-     */
-    /**
-     * @param {Array<number>} flatCoordinates Flat coordinates.
-     * @param {number} offset Offset.
-     * @param {import("../../coordinate.js").Coordinate} coordinate Coordinate.
-     * @param {number} stride Stride.
-     * @return {number} offset Offset.
-     */
-    function deflateCoordinate(flatCoordinates, offset, coordinate, stride) {
-        for (var i = 0, ii = coordinate.length; i < ii; ++i) {
-            flatCoordinates[offset++] = coordinate[i];
-        }
-        return offset;
-    }
-    /**
-     * @param {Array<number>} flatCoordinates Flat coordinates.
-     * @param {number} offset Offset.
-     * @param {Array<import("../../coordinate.js").Coordinate>} coordinates Coordinates.
-     * @param {number} stride Stride.
-     * @return {number} offset Offset.
-     */
-    function deflateCoordinates(flatCoordinates, offset, coordinates, stride) {
-        for (var i = 0, ii = coordinates.length; i < ii; ++i) {
-            var coordinate = coordinates[i];
-            for (var j = 0; j < stride; ++j) {
-                flatCoordinates[offset++] = coordinate[j];
-            }
-        }
-        return offset;
-    }
-    /**
-     * @param {Array<number>} flatCoordinates Flat coordinates.
-     * @param {number} offset Offset.
-     * @param {Array<Array<import("../../coordinate.js").Coordinate>>} coordinatess Coordinatess.
-     * @param {number} stride Stride.
-     * @param {Array<number>=} opt_ends Ends.
-     * @return {Array<number>} Ends.
-     */
-    function deflateCoordinatesArray(flatCoordinates, offset, coordinatess, stride, opt_ends) {
-        var ends = opt_ends ? opt_ends : [];
-        var i = 0;
-        for (var j = 0, jj = coordinatess.length; j < jj; ++j) {
-            var end = deflateCoordinates(flatCoordinates, offset, coordinatess[j], stride);
-            ends[i++] = end;
-            offset = end;
-        }
-        ends.length = i;
-        return ends;
     }
 
     /**
@@ -5110,7 +5221,7 @@
         return area;
     }
 
-    var __extends$$ = (undefined && undefined.__extends) || (function () {
+    var __extends$_ = (undefined && undefined.__extends) || (function () {
         var extendStatics = function (d, b) {
             extendStatics = Object.setPrototypeOf ||
                 ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -5131,7 +5242,7 @@
      * @api
      */
     var LinearRing = /** @class */ (function (_super) {
-        __extends$$(LinearRing, _super);
+        __extends$_(LinearRing, _super);
         /**
          * @param {Array<import("../coordinate.js").Coordinate>|Array<number>} coordinates Coordinates.
          *     For internal use, flat coordinates in combination with `opt_layout` are also accepted.
@@ -5242,117 +5353,6 @@
             this.changed();
         };
         return LinearRing;
-    }(SimpleGeometry));
-
-    var __extends$_ = (undefined && undefined.__extends) || (function () {
-        var extendStatics = function (d, b) {
-            extendStatics = Object.setPrototypeOf ||
-                ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-                function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-            return extendStatics(d, b);
-        };
-        return function (d, b) {
-            extendStatics(d, b);
-            function __() { this.constructor = d; }
-            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-        };
-    })();
-    /**
-     * @classdesc
-     * Point geometry.
-     *
-     * @api
-     */
-    var Point = /** @class */ (function (_super) {
-        __extends$_(Point, _super);
-        /**
-         * @param {import("../coordinate.js").Coordinate} coordinates Coordinates.
-         * @param {import("./GeometryLayout.js").default=} opt_layout Layout.
-         */
-        function Point(coordinates, opt_layout) {
-            var _this = _super.call(this) || this;
-            _this.setCoordinates(coordinates, opt_layout);
-            return _this;
-        }
-        /**
-         * Make a complete copy of the geometry.
-         * @return {!Point} Clone.
-         * @api
-         */
-        Point.prototype.clone = function () {
-            var point = new Point(this.flatCoordinates.slice(), this.layout);
-            point.applyProperties(this);
-            return point;
-        };
-        /**
-         * @param {number} x X.
-         * @param {number} y Y.
-         * @param {import("../coordinate.js").Coordinate} closestPoint Closest point.
-         * @param {number} minSquaredDistance Minimum squared distance.
-         * @return {number} Minimum squared distance.
-         */
-        Point.prototype.closestPointXY = function (x, y, closestPoint, minSquaredDistance) {
-            var flatCoordinates = this.flatCoordinates;
-            var squaredDistance$1 = squaredDistance(x, y, flatCoordinates[0], flatCoordinates[1]);
-            if (squaredDistance$1 < minSquaredDistance) {
-                var stride = this.stride;
-                for (var i = 0; i < stride; ++i) {
-                    closestPoint[i] = flatCoordinates[i];
-                }
-                closestPoint.length = stride;
-                return squaredDistance$1;
-            }
-            else {
-                return minSquaredDistance;
-            }
-        };
-        /**
-         * Return the coordinate of the point.
-         * @return {import("../coordinate.js").Coordinate} Coordinates.
-         * @api
-         */
-        Point.prototype.getCoordinates = function () {
-            return !this.flatCoordinates ? [] : this.flatCoordinates.slice();
-        };
-        /**
-         * @param {import("../extent.js").Extent} extent Extent.
-         * @protected
-         * @return {import("../extent.js").Extent} extent Extent.
-         */
-        Point.prototype.computeExtent = function (extent) {
-            return createOrUpdateFromCoordinate(this.flatCoordinates, extent);
-        };
-        /**
-         * Get the type of this geometry.
-         * @return {import("./GeometryType.js").default} Geometry type.
-         * @api
-         */
-        Point.prototype.getType = function () {
-            return GeometryType.POINT;
-        };
-        /**
-         * Test if the geometry and the passed extent intersect.
-         * @param {import("../extent.js").Extent} extent Extent.
-         * @return {boolean} `true` if the geometry and the extent intersect.
-         * @api
-         */
-        Point.prototype.intersectsExtent = function (extent) {
-            return containsXY(extent, this.flatCoordinates[0], this.flatCoordinates[1]);
-        };
-        /**
-         * @param {!Array<*>} coordinates Coordinates.
-         * @param {import("./GeometryLayout.js").default=} opt_layout Layout.
-         * @api
-         */
-        Point.prototype.setCoordinates = function (coordinates, opt_layout) {
-            this.setLayout(opt_layout, coordinates, 0);
-            if (!this.flatCoordinates) {
-                this.flatCoordinates = [];
-            }
-            this.flatCoordinates.length = deflateCoordinate(this.flatCoordinates, 0, coordinates, this.stride);
-            this.changed();
-        };
-        return Point;
     }(SimpleGeometry));
 
     /**
@@ -31078,40 +31078,6 @@
         return TileLayer;
     }(BaseTileLayer));
 
-    var icons = [
-        new Feature({
-            geometry: new Point(fromLonLat([15.69526, 48.28461])),
-            type: 'click',
-            text: "1888888888888",
-            images: [
-                "assets/img/moon.png"
-            ]
-        }),
-        new Feature({
-            geometry: new Point(fromLonLat([15.69476, 48.28529])),
-            type: 'click',
-            text: "288888888888",
-            images: [
-                "assets/Auring/DSC_1455.JPG",
-                "assets/Auring/20191122_085427.jpg"
-            ]
-        }),
-        new Feature({
-            geometry: new Point(fromLonLat([15.69476, 48.28729])),
-            type: 'click',
-            text: "38888888888",
-            images: [
-                "assets/Auring/20191122_090245.jpg",
-                "assets/Auring/20190825_113825.jpg",
-                "assets/Auring/DSC_1453.JPG"
-            ]
-        })
-    ];
-    var features = {
-        icons: icons
-    };
-
-    /* Import features from ./features.ts */
     var iconStyle = new Style({
         image: new Icon(({
             anchor: [0.5, 18],
@@ -31120,23 +31086,36 @@
             src: 'https://www.dropbox.com/s/fx852dq393bwjj3/icon.png?dl=1'
         }))
     });
-    features.icons.forEach(function (element) {
-        element.setStyle(iconStyle);
-    });
-    var vectorSource = new VectorSource({
-        features: features.icons
-    });
-    var vectorLayer = new VectorLayer({
-        source: vectorSource
+    $.getJSON("https://paul42812.github.io/hzbg/data.json", function (data) {
+        var icons = [];
+        for (var i = 0; i < data.icons.length; i++) {
+            var obj = data.icons[i];
+            console.log(obj);
+            icons.push(new Feature({
+                geometry: new Point(fromLonLat([obj.lonlat[0], obj.lonlat[1]])),
+                type: obj.type,
+                text: obj.text,
+                images: [obj.images]
+            }));
+        }
+        console.log(icons);
+        icons.forEach(function (element) {
+            element.setStyle(iconStyle);
+        });
+        var vectorSource = new VectorSource({
+            features: icons
+        });
+        var vectorLayer = new VectorLayer({
+            source: vectorSource
+        });
+        map.addLayer(vectorLayer);
     });
     /* Initialize map */
     var map = new Map({
-        /*controls: defaultControls().extend([new FullScreen()]),*/
         layers: [
             new TileLayer({
                 source: new OSM(),
-            }),
-            vectorLayer
+            })
         ],
         target: 'map',
         view: new View({
@@ -31148,15 +31127,15 @@
     });
     /* Change image in browser */
     function left() {
-        if (typeof imgs[index - 1] !== "undefined") {
+        if (typeof imgs[0][index - 1] !== "undefined") {
             index -= 1;
-            document.getElementById('img').src = imgs[index];
+            document.getElementById('img').src = "https://paul42812.github.io/hzbg/assets/720p/" + imgs[0][index];
         }
     }
     function right() {
-        if (typeof imgs[index + 1] !== "undefined") {
+        if (typeof imgs[0][index + 1] !== "undefined") {
             index += 1;
-            document.getElementById('img').src = imgs[index];
+            document.getElementById('img').src = "https://paul42812.github.io/hzbg/assets/720p/" + imgs[0][index];
         }
     }
     /* Listener */
@@ -31193,7 +31172,7 @@
             index = 0;
             hedrtext = f.get('text');
             document.getElementById('txt').innerHTML = hedrtext;
-            document.getElementById('img').src = imgs[0];
+            document.getElementById('img').src = "https://paul42812.github.io/hzbg/assets/720p/" + (imgs[0][0]);
             ctn = 0;
             while (typeof imgs[ctn] !== "undefined") {
                 ctn += 1;
@@ -31256,7 +31235,7 @@
         img.style.marginLeft = String(-(img.width / 2)) + "px";
         img.style.marginTop = String(-(img.height / 2) + $(window).height() * (4 / 100) - 5) + "px";
         try {
-            if (typeof imgs[index + 1] == "undefined") {
+            if (typeof imgs[0][index + 1] == "undefined") {
                 document.getElementById('right_btn').style.visibility = "hidden";
             }
             else {
@@ -31265,7 +31244,7 @@
         }
         catch (_a) { }
         try {
-            if (typeof imgs[index - 1] == "undefined") {
+            if (typeof imgs[0][index - 1] == "undefined") {
                 document.getElementById('left_btn').style.visibility = "hidden";
             }
             else {
