@@ -5,7 +5,7 @@
             "type": "click",
             "text": "1888888888888",
             "images": [
-                "assets/img/moon.png"
+                "img/moon.png"
             ]
         },
         
@@ -14,8 +14,8 @@
             "type": "click",
             "text": "288888888888",
             "images": [
-                "assets/Auring/DSC_1455.JPG",
-                "assets/Auring/20191122_085427.jpg"
+                "Auring/DSC_1455.JPG",
+                "Auring/20191122_085427.jpg"
             ]
         },
   
@@ -24,9 +24,9 @@
             "type": "click",
             "text": "38888888888",
             "images": [
-                "assets/Auring/20191122_090245.jpg",
-                "assets/Auring/20190825_113825.jpg",
-                "assets/Auring/DSC_1453.JPG"
+                "Auring/20191122_090245.jpg",
+                "Auring/20190825_113825.jpg",
+                "Auring/DSC_1453.JPG"
             ]
         }   
     ]
