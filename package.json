@@ -1,0 +1,17 @@
+{
+  "name": "hzbg",
+  "version": "0.0.2",
+  "description": "Pictures of Herzogenburg",
+  "main": "docs/index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build --public-url . index.html"
+  },
+  "author": "Paul42812",
+  "license": "ISC",
+  "dependencies": {
+    "ol": "^6.5.0",
+    "parcel": "*",
+    "parcel-bundler": "^1.12.5"
+  }
+}

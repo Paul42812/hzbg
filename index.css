@@ -1,0 +1,24 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 0;
+}
+
+.ol-zoom {
+    visibility: hidden;
+}
+
+#gallery {
+    top: 10%;
+    position: absolute;
+    z-index: 999;
+    right: 0;
+    width: 50%;
+}
